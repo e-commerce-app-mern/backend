@@ -55,7 +55,9 @@ npm run watch
 npm run dev
 ```
 
-## Read JSON data from body
+## Middlewares
+
+### Read JSON request data
 
 ```typescript
 app.use(express.json());
