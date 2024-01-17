@@ -39,13 +39,13 @@ tsc --init
 ### Depedencies
 
 ```
-npm i express dotenv mongoose validator
+npm i express dotenv mongoose validator multer
 ```
 
 ### Dev dependencies
 
 ```
-npm i --save-dev @types/express @types/node @types/validator typescript nodemon
+npm i --save-dev @types/express @types/node @types/validator  @types/multer typescript nodemon
 ```
 
 ## Run the following in seperate terminals simultaneously
@@ -62,3 +62,9 @@ npm run dev
 ```typescript
 app.use(express.json());
 ```
+
+### Handle [Errors](./src/middlewares/error.ts)
+
+### [Authenticate](./src//middlewares/auth.ts) Users
+
+### Handle File Uploads using [Multer](./src/middlewares/multer.ts)
