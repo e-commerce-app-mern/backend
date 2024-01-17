@@ -1,3 +1,4 @@
+import { adminOnly } from "./../middlewares/auth.js";
 import express from "express";
 import {
   deleteUser,
@@ -12,9 +13,9 @@ const app = express.Router();
 app.post("/new", newUser);
 
 //* /api/v1/user/all
-app.get("/all", getAllUsers);
+app.get("/all", adminOnly, getAllUsers);
 
 //* /api/v1/user/dynamic-id
-app.route("/:id").get(getUser).delete(deleteUser);
+app.route("/:id").get(getUser).delete(adminOnly, deleteUser);
 
 export default app;
