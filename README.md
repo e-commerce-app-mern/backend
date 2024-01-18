@@ -39,13 +39,13 @@ tsc --init
 ### Depedencies
 
 ```
-npm i express dotenv mongoose validator multer
+npm i express dotenv mongoose validator multer uuid
 ```
 
 ### Dev dependencies
 
 ```
-npm i --save-dev @types/express @types/node @types/validator  @types/multer typescript nodemon
+npm i --save-dev typescript nodemon @types/express @types/node @types/validator @types/multer @types/uuid @faker-js/faker
 ```
 
 ## Run the following in seperate terminals simultaneously
@@ -68,3 +68,11 @@ app.use(express.json());
 ### [Authenticate](./src//middlewares/auth.ts) Users
 
 ### Handle File Uploads using [Multer](./src/middlewares/multer.ts)
+
+This enables us to use multipart form data (text or files).
+
+### Upload images as static files
+
+```typescript
+app.use(urlname, express.static(pathname));
+```
