@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { connectDB } from "./utils/features.js";
+import NodeCache from "node-cache";
 
 //* Import Routes
 import userRoute from "./routes/user.js";
@@ -12,6 +13,9 @@ const port = 4000;
 
 //* DB connection
 connectDB();
+
+//* Implement Data Caching
+export const cache = new NodeCache();
 
 const app = express();
 

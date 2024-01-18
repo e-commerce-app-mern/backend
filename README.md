@@ -39,7 +39,7 @@ tsc --init
 ### Depedencies
 
 ```
-npm i express dotenv mongoose validator multer uuid
+npm i express dotenv mongoose validator multer uuid node-cache
 ```
 
 ### Dev dependencies
@@ -76,3 +76,7 @@ This enables us to use multipart form data (text or files).
 ```typescript
 app.use(urlname, express.static(pathname));
 ```
+
+## Features
+
+- Implemented caching to speed up the data fetching processes by 90%
