@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import { cache } from "../app.js";
 import { Product } from "../models/product.js";
-export const connectDB = async () => {
+export const connectDB = async (uri) => {
     try {
-        const db = await mongoose.connect("mongodb://localhost:27017", {
+        const db = await mongoose.connect(uri, {
             dbName: "Ecommerce_MERN",
         });
         console.log(`Database connected to ${db.connection.host}`);

@@ -1,18 +1,26 @@
 import express, { Request, Response } from "express";
 import { connectDB } from "./utils/features.js";
 import NodeCache from "node-cache";
+import { config } from "dotenv";
+import morgan from "morgan";
 
 //* Import Routes
 import userRoute from "./routes/user.js";
 import productRoute from "./routes/product.js";
+import orderRoute from "./routes/order.js";
 
 //* Import Middlewares
 import { errorMiddleware } from "./middlewares/error.js";
 
-const port = 4000;
+config({
+  path: "./config.env",
+});
+
+const port = process.env.PORT || 4000;
+const mongoURI = process.env.MONGO_URI || "";
 
 //* DB connection
-connectDB();
+connectDB(mongoURI);
 
 //* Implement Data Caching
 export const cache = new NodeCache();
@@ -21,6 +29,7 @@ const app = express();
 
 //* Middlewares
 app.use(express.json());
+app.use(morgan("dev"));
 
 //* Routes
 app.get("/", (req: Request, res: Response) => {
@@ -29,6 +38,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/product", productRoute);
+app.use("/api/v1/order", orderRoute);
 
 //* Access image files in uploads
 //* Uploads folder is declared static to serve static files

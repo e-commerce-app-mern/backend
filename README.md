@@ -39,13 +39,13 @@ tsc --init
 ### Depedencies
 
 ```
-npm i express dotenv mongoose validator multer uuid node-cache
+npm i express dotenv mongoose validator multer uuid node-cache morgan
 ```
 
 ### Dev dependencies
 
 ```
-npm i --save-dev typescript nodemon @types/express @types/node @types/validator @types/multer @types/uuid @faker-js/faker
+npm i --save-dev typescript nodemon @types/express @types/node @types/validator @types/multer @types/uuid @faker-js/faker @types/morgan
 ```
 
 ## Run the following in seperate terminals simultaneously
@@ -76,6 +76,8 @@ This enables us to use multipart form data (text or files).
 ```typescript
 app.use(urlname, express.static(pathname));
 ```
+
+### Receive HTTP requests info in the terminal with [morgan](https://www.npmjs.com/package/morgan)
 
 ## Features
 
