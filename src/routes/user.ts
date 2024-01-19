@@ -1,4 +1,3 @@
-import { adminOnly } from "./../middlewares/auth.js";
 import express from "express";
 import {
   deleteUser,
@@ -6,6 +5,7 @@ import {
   getUser,
   newUser,
 } from "../controllers/user.js";
+import { adminOnly } from "./../middlewares/auth.js";
 
 const app = express.Router();
 

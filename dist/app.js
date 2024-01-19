@@ -1,12 +1,12 @@
-import express from "express";
-import { connectDB } from "./utils/features.js";
-import NodeCache from "node-cache";
 import { config } from "dotenv";
+import express from "express";
 import morgan from "morgan";
+import NodeCache from "node-cache";
+import { connectDB } from "./utils/features.js";
 //* Import Routes
-import userRoute from "./routes/user.js";
-import productRoute from "./routes/product.js";
 import orderRoute from "./routes/order.js";
+import productRoute from "./routes/product.js";
+import userRoute from "./routes/user.js";
 //* Import Middlewares
 import { errorMiddleware } from "./middlewares/error.js";
 config({
