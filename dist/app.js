@@ -8,6 +8,7 @@ import orderRoute from "./routes/order.js";
 import productRoute from "./routes/product.js";
 import userRoute from "./routes/user.js";
 import paymentRoute from "./routes/payment.js";
+import dashboardRoute from "./routes/stats.js";
 //* Import Middlewares
 import { errorMiddleware } from "./middlewares/error.js";
 config({
@@ -31,6 +32,7 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/order", orderRoute);
 app.use("/api/v1/payment", paymentRoute);
+app.use("/api/v1/dashboard", dashboardRoute);
 //* Access image files in uploads
 //* Uploads folder is declared static to serve static files
 app.use("/uploads", express.static("uploads"));
