@@ -25,10 +25,6 @@ export const invalidateCache = async ({ product, order, admin, userId, productId
         if (typeof productId === "object") {
             productKeys.forEach((i) => productKeys.push(`product-${i}`));
         }
-        const products = await Product.find({}).select("_id");
-        products.forEach((i) => {
-            productKeys.push();
-        });
         cache.del(productKeys);
     }
     if (order) {

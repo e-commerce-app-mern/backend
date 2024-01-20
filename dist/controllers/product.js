@@ -11,7 +11,7 @@ export const getLatestProducts = TryCatch(async (req, res, next) => {
     if (cache.has("latest-products"))
         products = JSON.parse(cache.get("latest-products"));
     else {
-        //* Get 5 latest products
+        //* Get 5 latest products in descending order of creation time
         products = await Product.find({}).sort({ createdAt: -1 }).limit(5);
         //* Caching products
         cache.set("latest-products", JSON.stringify(products));

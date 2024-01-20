@@ -38,12 +38,6 @@ export const invalidateCache = async ({
       productKeys.forEach((i) => productKeys.push(`product-${i}`));
     }
 
-    const products = await Product.find({}).select("_id");
-
-    products.forEach((i) => {
-      productKeys.push();
-    });
-
     cache.del(productKeys);
   }
 
