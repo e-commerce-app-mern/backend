@@ -39,7 +39,7 @@ tsc --init
 ### Depedencies
 
 ```
-npm i express dotenv mongoose validator multer uuid node-cache morgan
+npm i express dotenv mongoose validator multer uuid node-cache morgan stripe
 ```
 
 ### Dev dependencies

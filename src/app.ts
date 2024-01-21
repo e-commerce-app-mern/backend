@@ -2,14 +2,15 @@ import { config } from "dotenv";
 import express, { Request, Response } from "express";
 import morgan from "morgan";
 import NodeCache from "node-cache";
+import Stripe from "stripe";
 import { connectDB } from "./utils/features.js";
 
 //* Import Routes
 import orderRoute from "./routes/order.js";
-import productRoute from "./routes/product.js";
-import userRoute from "./routes/user.js";
 import paymentRoute from "./routes/payment.js";
+import productRoute from "./routes/product.js";
 import dashboardRoute from "./routes/stats.js";
+import userRoute from "./routes/user.js";
 
 //* Import Middlewares
 import { errorMiddleware } from "./middlewares/error.js";
@@ -20,9 +21,12 @@ config({
 
 const port = process.env.PORT || 4000;
 const mongoURI = process.env.MONGO_URI || "";
+const stripeKey = process.env.STRIPE_KEY || "";
 
 //* DB connection
 connectDB(mongoURI);
+
+export const stripe = new Stripe(stripeKey);
 
 //* Implement Data Caching
 export const cache = new NodeCache();
