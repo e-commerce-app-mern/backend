@@ -84,6 +84,23 @@ app.use(urlname, express.static(pathname));
 - Implemented caching to speed up the data fetching processes by 90%
 - Configured route access based on user authentication and authorization
 
-## Deploy in Render
+## Deploy on Render
 
+### Build command
 
+```terminal
+npm install && mkdir -p uploads && npm run build
+```
+
+### Start command
+
+```terminal
+node dist/app.js
+```
+
+### MongoDB Atlas
+
+- Create a new cluster in the selected project.
+- Connect 0.0.0.0 as the IP.
+- Create a new user with read/write permission
+- Add the mongo_uri to the env file and render's env variable section.
