@@ -83,3 +83,7 @@ app.use(urlname, express.static(pathname));
 
 - Implemented caching to speed up the data fetching processes by 90%
 - Configured route access based on user authentication and authorization
+
+## Deploy in Render
+
+
