@@ -30,21 +30,19 @@ export const getLatestProducts = TryCatch(async (req, res, next) => {
 });
 
 //* Revalidate on creation, updation or deletion of products, or new orders
-export const getAllCategories = TryCatch(
-  async (req: Request<{}, {}, NewProductRequestBody>, res, next) => {
-    let categories;
+export const getAllCategories = TryCatch(async (req, res, next) => {
+  let categories;
 
-    if (cache.has("categories"))
-      categories = JSON.parse(cache.get("categories") as string);
-    else {
-      categories = await Product.distinct("categories");
+  if (cache.has("categories"))
+    categories = JSON.parse(cache.get("categories") as string);
+  else {
+    categories = await Product.distinct("category");
 
-      cache.set("categories", JSON.stringify(categories));
-    }
-
-    return res.status(200).json({ success: true, categories });
+    cache.set("categories", JSON.stringify(categories));
   }
-);
+
+  return res.status(200).json({ success: true, categories });
+});
 
 //* Revalidate on creation, updation or deletion of products, or new orders
 export const getAdminProducts = TryCatch(async (req, res, next) => {
@@ -152,7 +150,7 @@ export const deleteProductByID = TryCatch(async (req, res, next) => {
     console.log("Product Photo Deleted");
   });
 
-  await Product.deleteOne();
+  await product.deleteOne();
 
   invalidateCache({
     product: true,

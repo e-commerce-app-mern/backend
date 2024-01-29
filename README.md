@@ -2,7 +2,7 @@
 
 ## Project initialization
 
-```
+```cmd
 npm init -y
 npm i -g typescript nodemon
 tsc --init
@@ -38,19 +38,19 @@ tsc --init
 
 ### Depedencies
 
-```
-npm i express dotenv mongoose validator multer uuid node-cache morgan stripe
+```cmd
+npm i express dotenv mongoose validator multer uuid node-cache morgan stripe cors
 ```
 
 ### Dev dependencies
 
-```
-npm i --save-dev typescript nodemon @types/express @types/node @types/validator @types/multer @types/uuid @faker-js/faker @types/morgan
+```cmd
+npm i --save-dev typescript nodemon @types/express @types/node @types/validator @types/multer @types/uuid @faker-js/faker @types/morgan @types/cors
 ```
 
 ## Run the following in seperate terminals simultaneously
 
-```
+```cmd
 npm run watch
 npm run dev
 ```
@@ -82,3 +82,4 @@ app.use(urlname, express.static(pathname));
 ## Features
 
 - Implemented caching to speed up the data fetching processes by 90%
+- Configured route access based on user authentication and authorization

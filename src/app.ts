@@ -4,6 +4,7 @@ import morgan from "morgan";
 import NodeCache from "node-cache";
 import Stripe from "stripe";
 import { connectDB } from "./utils/features.js";
+import cors from "cors";
 
 //* Import Routes
 import orderRoute from "./routes/order.js";
@@ -16,7 +17,7 @@ import userRoute from "./routes/user.js";
 import { errorMiddleware } from "./middlewares/error.js";
 
 config({
-  path: "./config.env",
+  path: "./.env",
 });
 
 const port = process.env.PORT || 4000;
@@ -36,6 +37,7 @@ const app = express();
 //* Middlewares
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(cors());
 
 //* Routes
 app.get("/", (req: Request, res: Response) => {
