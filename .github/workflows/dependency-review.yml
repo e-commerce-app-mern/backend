@@ -1,21 +1,22 @@
-name: 'Dependency Review'
-on:
-  push:
-    branches: [ 'main' ]
+name: Dependabot fetch metadata
+on: 
   pull_request:
+    branches: [ 'main' ]
+  push:
     branches: [ 'main' ]
 
 permissions:
-  contents: read
+  pull-requests: write
+  issues: write
+  repository-projects: write
 
 jobs:
-  dependency-review:
+  dependabot:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'owner/my_repo'
     steps:
-      - name: 'Checkout Repository'
-        uses: actions/checkout@v4
-      - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v4
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
         with:
-          base-ref: ${{ github.event.pull_request.base.sha || 'main' }}
-          head-ref: ${{ github.event.pull_request.head.sha || github.ref }}
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
