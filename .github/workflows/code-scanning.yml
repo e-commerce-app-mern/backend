@@ -1,27 +1,12 @@
-name: "Security Integrations"
+name: "Code Scanning"
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  schedule:
-  # Every Monday at 12 a.m.
-    - cron: '0 0 * * 1'
 
-jobs:
-  dependency-review:
-    name: 'Dependency Review'
-    runs-on: 'ubuntu-latest'
-    permissions:
-      contents: read
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/dependency-review-action@v4
-      with:
-          base-ref: ${{ github.event.pull_request.base.sha || 'main' }}
-          head-ref: ${{ github.event.pull_request.head.sha || github.ref }}
-  
+jobs: 
   code-analysis:
     name: Analyze (${{ matrix.language }})
     runs-on: 'ubuntu-latest'
@@ -60,14 +45,3 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
-
-  secret-scanning-review:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: 'Secret Scanning Review Action'
-        uses: advanced-security/secret-scanning-review-action@v1
-        with:
-          token: ${{ secrets.SECRET_SCAN_REVIEW_GITHUB_TOKEN }}
-          fail-on-alert: true
-          fail-on-alert-exclude-closed: true
