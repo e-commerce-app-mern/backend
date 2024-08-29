@@ -104,5 +104,3 @@ node dist/app.js
 - Connect 0.0.0.0 as the IP.
 - Create a new user with read/write permission.
 - Add the mongo_uri to the env file and render's env variable section.
-
-
