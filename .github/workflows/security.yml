@@ -1,0 +1,70 @@
+name: "Security Integrations"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+  # Every Monday at 12 a.m.
+    - cron: '0 0 * * 1'
+
+jobs:
+  dependency-review:
+    name: 'Dependency Review'
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/dependency-review-action@v4
+  
+  code-analysis:
+    name: Analyze (${{ matrix.language }})
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 30
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - language: javascript-typescript
+          build-mode: none
+    
+    steps:
+    - uses: actions/checkout@v4
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+    - if: matrix.build-mode == 'manual'
+      shell: bash
+      run: |
+        echo 'If you are using a "manual" build mode for one or more of the' \
+          'languages you are analyzing, replace this with the commands to build' \
+          'your code, for example:'
+        echo '  make bootstrap'
+        echo '  make release'
+        exit 1
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
+
+  secret-scanning-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 'Secret Scanning Review Action'
+        uses: advanced-security/secret-scanning-review-action@v1
+        with:
+          token: ${{ secrets.SECRET_SCAN_REVIEW_GITHUB_TOKEN }}
+          fail-on-alert: true
+          fail-on-alert-exclude-closed: true
